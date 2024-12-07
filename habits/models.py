@@ -15,14 +15,14 @@ class Habit(models.Model):
     )
 
     place = models.CharField(max_length=50, verbose_name="Место")
-    time = models.DateTimeField(verbose_name="Время последнего выполнения", auto_now_add=True)
+    time = models.DateTimeField(verbose_name="Время выполнения")
     duration = models.IntegerField(verbose_name="Время на выполнение")
     periodicity = models.SmallIntegerField(verbose_name="Периодичность", default=1)
     action = models.CharField(max_length=100, verbose_name="Действие")
-    started_at = models.DateField(default=timezone.now)
+    started_at = models.DateField(default=timezone.now, verbose_name="Дата начала привычки")
 
     pleasant_habit = models.BooleanField(
-        verbose_name="Полезная привычка", default=False
+        verbose_name="Признак приятной привычки", default=False
     )
     related_habit = models.ForeignKey(
         "self",
