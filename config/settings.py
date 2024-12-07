@@ -11,7 +11,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = os.getenv("DEBUG", False) == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -24,6 +24,9 @@ INSTALLED_APPS = [
     "users",
     "habits",
     "rest_framework_simplejwt",
+    "corsheaders",
+    "django_celery_beat",
+    "drf_yasg",
 ]
 
 MIDDLEWARE = [
@@ -111,3 +114,25 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "UPDATE_LAST_LOGIN": True,  # отвечает за поле last_login чтобы было не Null
 }
+
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
+
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+
+CELERY_BEAT_SCHEDULE = {
+    "daily_task": {
+        "task": "habits.tasks.send_reminder",
+        "schedule": timedelta(seconds=2),
+    },
+}
+
+CORS_ALLOWED_ORIGINS = ["http://localhost:8000"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8000"]
+
+TELEGRAM_URL = "https://api.telegram.org/bot"
+TG_TOKEN = os.getenv("TG_TOKEN")
