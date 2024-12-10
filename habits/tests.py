@@ -62,11 +62,13 @@ class HabitAPITests(APITestCase):
         self.assertEqual(Habit.objects.all().count(), 0)
 
     def test_list_my_habits(self):
+        """Тесты на мои привычки"""
         response = self.client.get(self.my_habits_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data["results"]), 1)
 
     def test_list_public_habits(self):
+        """Тесты на публичные привычки"""
         Habit.objects.create(
             user=self.user,
             place="Спортзал",
