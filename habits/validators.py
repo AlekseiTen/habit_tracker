@@ -19,6 +19,7 @@ def validate_duration(duration):
 
 
 def validate_related_habit(data):
+    """Ф-ция которая не позволяет связать 2 приятные привычки(когда влаг установлен в False)"""
     related_habit = data.get("related_habit")
     if related_habit:
         habit = Habit.objects.get(pk=related_habit.pk)
