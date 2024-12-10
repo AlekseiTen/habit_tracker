@@ -88,7 +88,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "ru-ru"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Moscow"
 
 USE_I18N = True
 
@@ -128,7 +128,7 @@ CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 CELERY_BEAT_SCHEDULE = {
     "daily_task": {
         "task": "habits.tasks.send_reminder",
-        "schedule": timedelta(seconds=2),
+        "schedule": timedelta(seconds=10),
     },
 }
 
