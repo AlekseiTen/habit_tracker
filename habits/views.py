@@ -50,7 +50,7 @@ class MyHabitsListView(generics.ListAPIView):
     pagination_class = MyPaginator
 
     def get_queryset(self):
-        return Habit.objects.filter(user=self.request.user)
+        return Habit.objects.filter(user=self.request.user).order_by('time')
 
 
 class PublicListAPIView(generics.ListAPIView):

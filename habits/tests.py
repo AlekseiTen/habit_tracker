@@ -22,8 +22,8 @@ class HabitAPITests(APITestCase):
         self.create_url = "/habits/create/"
         self.update_url = f"/habits/{self.habit.pk}/update/"
         self.delete_url = f"/habits/{self.habit.pk}/delete/"
-        # self.my_habits_url = "/my_habits/"
-        # self.public_url = "/public/"
+        self.my_habits_url = "/habits/my_habits/"
+        # self.public_url = "/habits/public/"
         self.client.force_authenticate(user=self.user)
 
     def test_habit_create(self):
@@ -60,3 +60,8 @@ class HabitAPITests(APITestCase):
         response = self.client.delete(self.delete_url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Habit.objects.all().count(), 0)
+
+    def test_list_my_habits(self):
+        response = self.client.get(self.my_habits_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data["results"]), 1)
