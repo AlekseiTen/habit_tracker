@@ -12,6 +12,7 @@ class HabitCreateAPIView(generics.CreateAPIView):
     """
     Создание привычек
     """
+
     serializer_class = HabitSerializer
     permission_classes = (IsAuthenticated,)
 
