@@ -60,3 +60,6 @@ class PublicListAPIView(generics.ListAPIView):
     queryset = Habit.objects.filter(is_public=True)
     permission_classes = (AllowAny,)
     pagination_class = MyPaginator
+
+    def get_queryset(self):
+        return Habit.objects.filter(is_public=True).order_by('time')
