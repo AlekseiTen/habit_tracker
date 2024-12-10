@@ -31,7 +31,7 @@ def validate_related_habit(data):
 def validate_pleasant_habit(data):
     if data.get("pleasant_habit") and (data.get("related_habit") or data.get("reward")):
         raise ValidationError(
-            "У полезной привычки не может быть вознаграждения или связанной привычки"
+            "У приятной привычки не может быть вознаграждения или связанной привычки"
         )
 
 
