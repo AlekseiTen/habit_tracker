@@ -24,7 +24,7 @@ def validate_related_habit(data):
         habit = Habit.objects.get(pk=related_habit.pk)
         if not habit.pleasant_habit:
             raise ValidationError(
-                "В связанные привычки могут попадать только привычки с признаком полезной привычки"
+                "В связанные привычки могут попадать только привычки с признаком приятной привычки"
             )
 
 
