@@ -37,7 +37,8 @@ def send_reminder():
 
             if habit.reward:
                 send_telegram_message(
-                    user_tg, f"Молодец! Ты заслужил награду: {habit.reward} после {habit.action}"
+                    user_tg,
+                    f"Молодец! Ты заслужил награду: {habit.reward} после {habit.action}",
                 )
 
             # Обновление времени выполнения привычки на сутки (чтобы только одно сообщение в день приходило)
